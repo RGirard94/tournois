@@ -2,13 +2,17 @@
   <section class="tournaments">
     <header class="header">
       <h1>TOURNOIS</h1>
-      <input type="text" class="new-tournament" placeholder="Ajouter un tournoi" v-model="tournamentToAdd" @keyup.enter="addTournament">
+      <div class="tournament-info">
+        <input type="text" class="new-tournament" placeholder="Nom du tournoi" v-model="tournamentDetails.tournamentName">
+        <input type="text" class="new-tournament" placeholder="Ajouter une date" v-model="tournamentDetails.tournamentDate">
+        <input type="text" class="new-tournament" placeholder="Ajouter une adresse" @keyup.enter="addTournament" v-model="tournamentDetails.tournamentAddress">
+      </div>
     </header>
     <div class="main">
       <ul class="tournament-list">
         <li class="tournament" v-for="tournament in tournamentsList">
           <div class="view">
-            <label>{{ tournament.name }}</label>
+            <label>{{ tournament.name }} {{ tournament.date }} {{ tournament.address }}</label>
           </div>
         </li>
       </ul>
@@ -21,13 +25,16 @@ export default {
   data () {
     return {
       tournamentsList: [],
-      tournamentToAdd: ''
+      tournamentDetails: {tournamentName: '', tournamentDate: '', tournamentAddress: ''}
     }
   },
 
   methods: {
     addTournament () {
-      this.tournamentsList.push({name: this.tournamentToAdd, participate: false})
+      this.tournamentsList.push({name: this.tournamentDetails.tournamentName, date: this.tournamentDetails.tournamentDate, address: this.tournamentDetails.tournamentAddress, participate: false})
+      this.tournamentDetails.tournamentName = ''
+      this.tournamentDetails.tournamentDate = ''
+      this.tournamentDetails.tournamentAddress = ''
     }
   }
 }

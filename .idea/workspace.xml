@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="36d19efc-196f-4e58-8400-0ac8fe91ffd4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/Tournaments.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Hello.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Hello.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Tournaments.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Tournaments.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
