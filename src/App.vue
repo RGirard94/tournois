@@ -1,17 +1,19 @@
 <template>
   <div id="app">
-
+    <tournaments></tournaments>
   </div>
 </template>
 
 <script>
-import Hello from './components/Hello'
+import Tournaments from './components/Tournaments'
 
 export default {
   components: {
-    Hello
+    Tournaments
   }
 }
 </script>
+
+<style>
 
 </style>
