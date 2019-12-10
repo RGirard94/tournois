@@ -1,23 +1,23 @@
 <template>
-  <section class="tournaments">
+  <div class="tournaments">
     <header class="header">
       <h1>TOURNOIS</h1>
       <div class="tournament-info">
-        <input type="text" class="new-tournament" placeholder="Nom du tournoi" v-model="tournamentDetails.tournamentName">
-        <input type="text" class="new-tournament" placeholder="Ajouter une date" v-model="tournamentDetails.tournamentDate">
+        <input type="text" class="new-tournament" placeholder="Nom du tournoi" @keyup.enter="addTournament" v-model="tournamentDetails.tournamentName">
+        <input type="text" class="new-tournament" placeholder="Ajouter une date" @keyup.enter="addTournament" v-model="tournamentDetails.tournamentDate">
         <input type="text" class="new-tournament" placeholder="Ajouter une adresse" @keyup.enter="addTournament" v-model="tournamentDetails.tournamentAddress">
       </div>
     </header>
-    <div class="main">
-      <ul class="tournament-list">
-        <li class="tournament" v-for="tournament in tournamentsList">
-          <div class="view">
-            <label>{{ tournament.name }} {{ tournament.date }} {{ tournament.address }}</label>
-          </div>
-        </li>
-      </ul>
-    </div>
-  </section>
+  </div>
+  <div class="main">
+    <ul class="tournament-list">
+      <li class="tournament" v-for="tournament in tournamentsList">
+        <div class="view">
+          <label>{{ tournament.name }} {{ tournament.date }} {{ tournament.address }}</label>
+        </div>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>
@@ -31,10 +31,12 @@ export default {
 
   methods: {
     addTournament () {
-      this.tournamentsList.push({name: this.tournamentDetails.tournamentName, date: this.tournamentDetails.tournamentDate, address: this.tournamentDetails.tournamentAddress, participate: false})
-      this.tournamentDetails.tournamentName = ''
-      this.tournamentDetails.tournamentDate = ''
-      this.tournamentDetails.tournamentAddress = ''
+      if (this.tournamentDetails.tournamentName !== '' && this.tournamentDetails.tournamentDate !== '' && this.tournamentDetails.tournamentAddress !== '') {
+        this.tournamentsList.push({name: this.tournamentDetails.tournamentName, date: this.tournamentDetails.tournamentDate, address: this.tournamentDetails.tournamentAddress, participate: false})
+        this.tournamentDetails.tournamentName = ''
+        this.tournamentDetails.tournamentDate = ''
+        this.tournamentDetails.tournamentAddress = ''
+      }
     }
   }
 }
