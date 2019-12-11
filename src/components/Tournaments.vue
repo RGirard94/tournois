@@ -13,11 +13,23 @@
     <ul class="tournament-list">
       <li class="tournament" v-for="tournament in tournamentsList">
         <div class="view">
+          <input type="checkbox" class="toggle" v-model="tournament.showChoices" @click="resetOtherTournamentsInfo(tournament.name)">
           <label>{{ tournament.name }} {{ tournament.date }} {{ tournament.address }}</label>
+          <div v-if="tournament.showChoices">
+            <ul class="tournament-list">
+              <li><input type="checkbox" v-model="tournament.SH_SD" class="toggle">
+              <label>SH/SD</label></li>
+              <li><input type="checkbox" v-model="tournament.DH_DD" class="toggle">
+              <label>DH/DD</label></li>
+              <li><input type="checkbox" v-model="tournament.DM" class="toggle">
+              <label>DM</label></li>
+            </ul>
+          </div>
         </div>
       </li>
     </ul>
   </div>
+
 </template>
 
 <script>
@@ -32,10 +44,26 @@ export default {
   methods: {
     addTournament () {
       if (this.tournamentDetails.tournamentName !== '' && this.tournamentDetails.tournamentDate !== '' && this.tournamentDetails.tournamentAddress !== '') {
-        this.tournamentsList.push({name: this.tournamentDetails.tournamentName, date: this.tournamentDetails.tournamentDate, address: this.tournamentDetails.tournamentAddress, participate: false})
+        this.tournamentsList.push({name: this.tournamentDetails.tournamentName, date: this.tournamentDetails.tournamentDate, address: this.tournamentDetails.tournamentAddress, showChoices: false, SH_SD: false, DH_DD: false, DM: false})
         this.tournamentDetails.tournamentName = ''
         this.tournamentDetails.tournamentDate = ''
         this.tournamentDetails.tournamentAddress = ''
+      }
+    },
+
+    resetOtherTournamentsInfo (t) {
+      for (var i = 0; i < this.tournamentsList.length; i++) {
+        if (this.tournamentsList[i].name !== t) {
+          this.tournamentsList[i].showChoices = false
+        }
+      }
+    },
+
+    submitChoices (t) {
+      for (var i = 0; i < this.tournamentsList.length; i++) {
+        if (this.tournamentsList[i].name === t) {
+          this.tournamentsList[i].showChoices = false
+        }
       }
     }
   }
@@ -68,6 +96,10 @@ body {
 
 .hidden {
 	display: none;
+}
+
+.inline {
+  display: inline-block;
 }
 
 .tournaments {
@@ -174,7 +206,7 @@ body {
 	height: auto;
 	position: absolute;
 	top: 0;
-	bottom: 0;
+	bottom: 1;
 	margin: auto 0;
 	border: none; /* Mobile Safari */
 	-webkit-appearance: none;
@@ -251,6 +283,35 @@ body {
 	position: relative;
 	z-index: 2;
 	border-top: 1px solid #e6e6e6;
+}
+
+.toggle-all {
+	text-align: center;
+	border: none; /* Mobile Safari */
+	opacity: 0;
+	position: absolute;
+}
+
+.toggle-all + label {
+	width: 60px;
+	height: 34px;
+	font-size: 0;
+	position: absolute;
+	top: -52px;
+	left: -13px;
+	-webkit-transform: rotate(90deg);
+	transform: rotate(90deg);
+}
+
+.toggle-all + label:before {
+	content: '❯';
+	font-size: 22px;
+	color: #e6e6e6;
+	padding: 10px 27px 10px 27px;
+}
+
+.toggle-all:checked + label:before {
+	color: #737373;
 }
 
 /*
