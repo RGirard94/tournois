@@ -14,7 +14,7 @@
       <li class="tournament" v-for="tournament in tournamentsList">
         <div class="view">
           <input type="checkbox" class="toggle" v-model="tournament.showChoices" @click="resetOtherTournamentsInfo(tournament.name)">
-          <label>{{ tournament.name }} {{ tournament.date }} {{ tournament.address }}</label>
+          <label :class="{completed: tournament.SH_SD || tournament.DH_DD || tournament.DM}">{{ tournament.name }} {{ tournament.date }} {{ tournament.address }}</label>
           <div v-if="tournament.showChoices">
             <ul class="tournament-list">
               <li><input type="checkbox" v-model="tournament.SH_SD" class="toggle">
@@ -59,12 +59,14 @@ export default {
       }
     },
 
-    submitChoices (t) {
-      for (var i = 0; i < this.tournamentsList.length; i++) {
-        if (this.tournamentsList[i].name === t) {
-          this.tournamentsList[i].showChoices = false
-        }
-      }
+    test () {
+      console.log(this.tournamentsList)
+    }
+  },
+
+  computed: {
+    isRegistered () {
+      return this.tournamentsList.filter(tournament => (tournament.SH_SD || tournament.DH_DD || tournament.DM))
     }
   }
 }
@@ -239,10 +241,11 @@ body {
 	transition: color 0.4s;
 }
 
-.tournament-list li.completed label {
-	color: #d9d9d9;
-	text-decoration: line-through;
+.tournament-list label.completed {
+	color: #3FFF33;
 }
+
+
 
 .tournament-list li .destroy {
 	display: none;
